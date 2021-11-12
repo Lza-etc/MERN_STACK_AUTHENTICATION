@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
 import { useState } from "react";
+import axios from "axios"
 import "./login.css";
 import unlock from "../../images/unlock.png";
 const LoginPage = () => {
@@ -13,6 +14,11 @@ const LoginPage = () => {
   const login = (e) => {
     e.preventDefault();
     console.log(userLogin);
+    axios.get("http://localhost:5000/").then((res)=>{
+        console.log(res);
+    }).catch((err)=>{
+        console.log(err);
+    })
   };
   return (
     <section className="vh-100">
