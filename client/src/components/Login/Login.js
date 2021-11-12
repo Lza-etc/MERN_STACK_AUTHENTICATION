@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
 import { useState } from "react";
-import axios from "axios"
+import axios from "axios";
 import "./login.css";
 import unlock from "../../images/unlock.png";
 const LoginPage = () => {
@@ -13,11 +13,18 @@ const LoginPage = () => {
   const [errormsg, setErrormsg] = useState("");
   const login = (e) => {
     e.preventDefault();
-    axios.get(process.env.REACT_APP_Server).then((res)=>{
+    console.log(userLogin);
+    axios
+      .post(process.env.REACT_APP_Server + "/login", {
+        email: userLogin.email,
+        password: userLogin.password,
+      })
+      .then((res) => {
         console.log(res);
-    }).catch((err)=>{
-        console.log(err);
-    })
+      })
+      .catch((err) => {
+        setErrormsg(err.request.response);
+      });
   };
   return (
     <section className="vh-100">

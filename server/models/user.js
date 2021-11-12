@@ -20,11 +20,14 @@ const UserSchema = new mongooseSchema(
       required: false,
       type: String,
       unique:true,
+      sparse: true,
+      
     },
     facebookId: {
       required: false,
       type: String,
       unique:true,
+      sparse: true,
     },
   },
   { timestamps: true }

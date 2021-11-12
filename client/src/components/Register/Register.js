@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
 import { useState } from "react";
+import axios from "axios";
 import unlock from "../../images/unlock.png";
 import "./register.css";
 const RegisterPage = () => {
@@ -15,7 +16,19 @@ const RegisterPage = () => {
   const regsiter = (e) => {
     e.preventDefault();
     if (userRegister.password === userRegister.cpassword) {
-      setErrormsg("");
+      axios
+        .post(process.env.REACT_APP_Server + "/register", {
+          name: userRegister.name,
+          email: userRegister.email,
+          password: userRegister.password,
+        })
+        .then((res) => {
+          console.log(res);
+          setErrormsg("");
+        })
+        .catch((err) => {
+          setErrormsg(err.request.response);
+        });
     } else {
       setErrormsg("Passwords do not match!!");
     }

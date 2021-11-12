@@ -1,0 +1,29 @@
+Navbar issue for different pages
+forgot password
+reset password
+links in login and signup for interconnecting the pages
+phone number country code
+download the image from boostrap used up in sign up
+add idea of writing posts
+like social media etc
+ERROR FILED FOR DISPLAYING PASSWORD
+css of error messages
+set up a 404 error page
+setup process.env files
+
+
+mongodb
+create new project
+create new clouster
+under security create new user
+edit network access to allow drawl from access anywhere db
+.env.Example
+
+image filed in databse
+
+fix error in github node module and .env uploaded to github client and server
+password validation
+
+registration sucessfull message etc..
+error message css
+
