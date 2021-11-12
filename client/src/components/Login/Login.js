@@ -13,8 +13,7 @@ const LoginPage = () => {
   const [errormsg, setErrormsg] = useState("");
   const login = (e) => {
     e.preventDefault();
-    console.log(userLogin);
-    axios.get("http://localhost:5000/").then((res)=>{
+    axios.get(process.env.REACT_APP_Server).then((res)=>{
         console.log(res);
     }).catch((err)=>{
         console.log(err);
