@@ -2,6 +2,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import usePasswordValidator from 'react-use-password-validator'
 import unlock from "../../images/unlock.png";
 import "./register.css";
 const RegisterPage = () => {
@@ -11,24 +12,33 @@ const RegisterPage = () => {
     password: "",
     cpassword: "",
   });
+  const [ isValid, setIsValid ] = usePasswordValidator({
+    min: 6,
+  })
   const [errormsg, setErrormsg] = useState("");
 
   const regsiter = (e) => {
     e.preventDefault();
     if (userRegister.password === userRegister.cpassword) {
-      axios
-        .post(process.env.REACT_APP_Server + "/register", {
-          name: userRegister.name,
-          email: userRegister.email,
-          password: userRegister.password,
-        })
-        .then((res) => {
-          console.log(res);
-          setErrormsg("");
-        })
-        .catch((err) => {
-          setErrormsg(err.request.response);
-        });
+        if(isValid){
+            axios
+            .post(process.env.REACT_APP_Server + "/register", {
+              name: userRegister.name,
+              email: userRegister.email,
+              password: userRegister.password,
+            })
+            .then((res) => {
+              console.log(res);
+              setErrormsg("");
+            })
+            .catch((err) => {
+              setErrormsg(err.request.response);
+            });
+        }
+        else {
+            setErrormsg("Password should have atleast 6 characters");
+          }
+
     } else {
       setErrormsg("Passwords do not match!!");
     }
@@ -90,6 +100,7 @@ const RegisterPage = () => {
                       ...userRegister,
                       password: e.target.value,
                     });
+                    setIsValid(e.target.value);
                   }}
                 />
                 <label className="form-label" for="form1Example23">
