@@ -26,4 +26,5 @@ password validation
 
 registration sucessfull message etc..
 error message css
-
+github login
+logo in google oauth consnet screen
