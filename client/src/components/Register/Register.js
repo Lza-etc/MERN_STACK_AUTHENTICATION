@@ -9,9 +9,11 @@ import {
   GoogleLoginButton,
   FacebookLoginButton,
 } from "react-social-login-buttons";
+import { useHistory } from "react-router";
 import unlock from "../../images/unlock.png";
 import "./register.css";
 const RegisterPage = () => {
+  let history = useHistory();
   const [userRegister, setUserRegister] = useState({
     name: "",
     email: "",
@@ -22,6 +24,7 @@ const RegisterPage = () => {
     min: 6,
   });
   const [errormsg, setErrormsg] = useState("");
+  const [token, setToken] = useState("");
 
   const regsiter = (e) => {
     e.preventDefault();
@@ -34,8 +37,11 @@ const RegisterPage = () => {
             password: userRegister.password,
           })
           .then((res) => {
-            console.log(res);
             setErrormsg("");
+         
+            setToken(res.data["authorisation"]);
+            localStorage.setItem("authorisation",res.data["authorisation"]);
+            history.push("/dashboard");
           })
           .catch((err) => {
             setErrormsg(err.request.response);
