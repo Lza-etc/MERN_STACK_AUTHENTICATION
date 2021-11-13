@@ -2,7 +2,9 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import usePasswordValidator from 'react-use-password-validator'
+import usePasswordValidator from "react-use-password-validator";
+import GoogleLogin from "react-google-login";
+import { GoogleLoginButton } from "react-social-login-buttons";
 import unlock from "../../images/unlock.png";
 import "./register.css";
 const RegisterPage = () => {
@@ -12,36 +14,51 @@ const RegisterPage = () => {
     password: "",
     cpassword: "",
   });
-  const [ isValid, setIsValid ] = usePasswordValidator({
+  const [isValid, setIsValid] = usePasswordValidator({
     min: 6,
-  })
+  });
   const [errormsg, setErrormsg] = useState("");
 
   const regsiter = (e) => {
     e.preventDefault();
     if (userRegister.password === userRegister.cpassword) {
-        if(isValid){
-            axios
-            .post(process.env.REACT_APP_Server + "/register", {
-              name: userRegister.name,
-              email: userRegister.email,
-              password: userRegister.password,
-            })
-            .then((res) => {
-              console.log(res);
-              setErrormsg("");
-            })
-            .catch((err) => {
-              setErrormsg(err.request.response);
-            });
-        }
-        else {
-            setErrormsg("Password should have atleast 6 characters");
-          }
-
+      if (isValid) {
+        axios
+          .post(process.env.REACT_APP_Server + "/register", {
+            name: userRegister.name,
+            email: userRegister.email,
+            password: userRegister.password,
+          })
+          .then((res) => {
+            console.log(res);
+            setErrormsg("");
+          })
+          .catch((err) => {
+            setErrormsg(err.request.response);
+          });
+      } else {
+        setErrormsg("Password should have atleast 6 characters");
+      }
     } else {
       setErrormsg("Passwords do not match!!");
     }
+  };
+  const responseGoogle = (response) => {
+    axios
+      .post(process.env.REACT_APP_Server + "/register/google", {
+        googleId: response.profileObj.googleId,
+        token: response.tokenId,
+      })
+      .then((res) => {
+        console.log(res);
+        setErrormsg("");
+      })
+      .catch((err) => {
+        setErrormsg(err.request.response);
+      });
+  };
+  const failureGoogle = (response) => {
+    setErrormsg(response);
   };
   return (
     <section className="vh-100">
@@ -158,14 +175,24 @@ const RegisterPage = () => {
                 <i className="fab fa-facebook-f me-2 mr-2"></i> Sign up with
                 Facebook
               </a>
-              <a
-                className="btn  btn-lg btn-block mt-3 mb-3"
-                style={{ backgroundColor: "#dd4b39" }}
-                href="#!"
-                role="button"
-              >
-                <i className="fab fa-google me-2 mr-2"></i> Sign up with Google
-              </a>
+              <div className="mt-3 google-div">
+                <GoogleLogin
+                  clientId="11449592949-67stjoat4god0tro9orlh3c3kab0oe58.apps.googleusercontent.com"
+                  // buttonText="Login"
+                  onSuccess={responseGoogle}
+                  onFailure={failureGoogle}
+                  autoLoad={false}
+                  cookiePolicy={"single_host_origin"}
+                  render={(renderProps) => (
+                    <GoogleLoginButton
+                      className="google-btn"
+                      onClick={renderProps.onClick}
+                      disabled={renderProps.disabled}
+                      text={"Sign up with Google"}
+                    />
+                  )}
+                />
+              </div>
             </form>
           </div>
         </div>
