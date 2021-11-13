@@ -30,4 +30,4 @@ github login
 logo in google oauth consnet screen
 update urii in google and facebook appp
 
-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
+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
