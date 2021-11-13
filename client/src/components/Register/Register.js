@@ -4,7 +4,11 @@ import { useState } from "react";
 import axios from "axios";
 import usePasswordValidator from "react-use-password-validator";
 import GoogleLogin from "react-google-login";
-import { GoogleLoginButton } from "react-social-login-buttons";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import {
+  GoogleLoginButton,
+  FacebookLoginButton,
+} from "react-social-login-buttons";
 import unlock from "../../images/unlock.png";
 import "./register.css";
 const RegisterPage = () => {
@@ -58,7 +62,29 @@ const RegisterPage = () => {
       });
   };
   const failureGoogle = (response) => {
-    setErrormsg(response);
+    console.log(response);
+    // setErrormsg(response);
+  };
+  const responseFacebook = (response) => {
+    axios
+      .post("http://localhost:5000/register/facebook", {
+        facebookId: response.userID,
+        accessToken: response.accessToken,
+      })
+      .then((res) => {
+        console.log(res);
+        setErrormsg("");
+      })
+      .catch((err) => {
+        if (err) {
+          console.log(err.request);
+          setErrormsg(err.request.response);
+        }
+      });
+  };
+
+  const failureFacebook = (response) => {
+    // setErrormsg(response);
   };
   return (
     <section className="vh-100">
@@ -166,15 +192,24 @@ const RegisterPage = () => {
                 <p className="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
               </div>
 
-              <a
-                className="btn  btn-lg btn-block"
-                style={{ backgroundColor: "#3b5998" }}
-                href="#!"
-                role="button"
-              >
-                <i className="fab fa-facebook-f me-2 mr-2"></i> Sign up with
-                Facebook
-              </a>
+              <div className="mt-3 text-center facebook-div">
+                <FacebookLogin
+                  appId="4436546636466456"
+                  fields="name,email,picture"
+                  scope="public_profile, email"
+                  autoLoad={false}
+                  callback={responseFacebook}
+                  onFailure={failureFacebook}
+                  render={(renderProps) => (
+                    <FacebookLoginButton
+                      text={"Signup with Facebook"}
+                      onClick={renderProps.onClick}
+                      disabled={renderProps.disabled}
+                      className="facebook-btn"
+                    />
+                  )}
+                />
+              </div>
               <div className="mt-3 google-div">
                 <GoogleLogin
                   clientId="11449592949-67stjoat4god0tro9orlh3c3kab0oe58.apps.googleusercontent.com"

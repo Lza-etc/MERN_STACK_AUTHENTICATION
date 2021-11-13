@@ -1,6 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const { OAuth2Client } = require("google-auth-library");
+const axios = require("axios");
 const UserModel = require("../models/user");
 const router = express.Router();
 const client = new OAuth2Client(
@@ -75,6 +76,54 @@ router.post("/google", async (req, res) => {
       });
   } catch (error) {
     console.log(error);
+  }
+});
+
+router.post("/facebook", async (req, res) => {
+  const accessToken = req.body.accessToken;
+  const facebookId = req.body.facebookId;
+  const urlGraphFacebook = `https://graph.facebook.com/v2.11/${facebookId}/?fields=id,name,email&access_token=${accessToken}`;
+  try {
+    const response = await axios.get(urlGraphFacebook);
+    const { name, email } = response.data;
+    let fUser;
+    try {
+      fUser = await UserModel.findOne({
+        email: response.data.email,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    if (fUser) {
+      if (!fUser.facebookId) {
+        await UserModel.updateOne(
+          { email: email },
+          { $set: { facebookId: facebookId } }
+        );
+      }
+
+      return res.status(200).json({ message: "Login success" });
+    } else {
+      try {
+        const user = new UserModel({
+          name,
+          email,
+          facebookId,
+        });
+        user
+          .save()
+          .then((resp) => {
+            console.log("User registered sucessfully");
+            return res.status(200).send("User registered sucessfully");
+          })
+          .catch((error) => {
+            return res.status(401).send(error);
+          });
+      } catch (error) {}
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send("");
   }
 });
 
