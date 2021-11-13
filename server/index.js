@@ -5,6 +5,7 @@ var bodyParser = require('body-parser')
 require("dotenv").config();
 const loginRouter=require("./routes/loginRoute");
 const registerRouter=require("./routes/registerRoutes");
+const dashboard=require("./routes/dashboard")
 const app=express();
 
 app.use(cors({
@@ -22,6 +23,7 @@ mongoose.connect(dbUri).then((res)=>{
 
 app.use("/login",loginRouter);
 app.use("/register",registerRouter);
+app.use("/dashboard",dashboard);
 
 
 app.get("/",(req,res)=>{

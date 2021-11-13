@@ -24,6 +24,7 @@ const RegisterPage = () => {
     min: 6,
   });
   const [errormsg, setErrormsg] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const [token, setToken] = useState("");
 
   const regsiter = (e) => {
@@ -38,9 +39,8 @@ const RegisterPage = () => {
           })
           .then((res) => {
             setErrormsg("");
-         
             setToken(res.data["authorisation"]);
-            localStorage.setItem("authorisation",res.data["authorisation"]);
+            localStorage.setItem("authorisation", res.data["authorisation"]);
             history.push("/dashboard");
           })
           .catch((err) => {
@@ -60,8 +60,10 @@ const RegisterPage = () => {
         token: response.tokenId,
       })
       .then((res) => {
-        console.log(res);
         setErrormsg("");
+        setToken(res.data["authorisation"]);
+        localStorage.setItem("authorisation", res.data["authorisation"]);
+        history.push("/dashboard");
       })
       .catch((err) => {
         setErrormsg(err.request.response);
@@ -78,8 +80,10 @@ const RegisterPage = () => {
         accessToken: response.accessToken,
       })
       .then((res) => {
-        console.log(res);
         setErrormsg("");
+        setToken(res.data["authorisation"]);
+        localStorage.setItem("authorisation", res.data["authorisation"]);
+        history.push("/dashboard");
       })
       .catch((err) => {
         if (err) {

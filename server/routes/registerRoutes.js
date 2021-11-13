@@ -57,8 +57,14 @@ router.post("/google", async (req, res) => {
             email: email,
           });
           if (user) {
-            console.log("Login user there");
-            return res.status(200).send("Login");
+            const userJwt = {
+              name: name,
+              email: email,
+            };
+            const accessToken = jwt.sign(userJwt, process.env.ACCESS_TOKEN);
+            return res
+              .status(200)
+              .json({ message: "success", authorisation: accessToken });
           } else {
             const user = new UserModel({
               name,
@@ -68,8 +74,14 @@ router.post("/google", async (req, res) => {
             user
               .save()
               .then((resp) => {
-                console.log("User registered sucessfully");
-                return res.status(200).send("User registered sucessfully");
+                const userJwt = {
+                  name: name,
+                  email: email,
+                };
+                const accessToken = jwt.sign(userJwt, process.env.ACCESS_TOKEN);
+                return res
+                  .status(200)
+                  .json({ message: "success", authorisation: accessToken });
               })
               .catch((error) => {
                 return res.status(401).send(error);
@@ -110,7 +122,14 @@ router.post("/facebook", async (req, res) => {
         );
       }
 
-      return res.status(200).json({ message: "Login success" });
+      const userJwt = {
+        name: name,
+        email: email,
+      };
+      const accessToken = jwt.sign(userJwt, process.env.ACCESS_TOKEN);
+      return res
+        .status(200)
+        .json({ message: "success", authorisation: accessToken });
     } else {
       try {
         const user = new UserModel({
@@ -121,8 +140,14 @@ router.post("/facebook", async (req, res) => {
         user
           .save()
           .then((resp) => {
-            console.log("User registered sucessfully");
-            return res.status(200).send("User registered sucessfully");
+            const userJwt = {
+              name: name,
+              email: email,
+            };
+            const accessToken = jwt.sign(userJwt, process.env.ACCESS_TOKEN);
+            return res
+              .status(200)
+              .json({ message: "success", authorisation: accessToken });
           })
           .catch((error) => {
             return res.status(401).send(error);

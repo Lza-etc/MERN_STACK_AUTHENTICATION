@@ -1,10 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import jwt from "jsonwebtoken";
+import axios from "axios";
 import "./dashboard.css";
 
 const Dashboard = () => {
   let history = useHistory();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   useEffect(() => {
     const token = localStorage.getItem("authorisation");
     if (token) {
@@ -13,7 +16,19 @@ const Dashboard = () => {
         localStorage.clear();
         history.push("/");
       }
-      //api call
+      axios
+        .get(process.env.REACT_APP_Server + "/dashboard", {
+          headers: {
+            authorisation: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          setName(res.data.name);
+          setEmail(res.data.email);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
       history.push("/");
     }
@@ -39,7 +54,7 @@ const Dashboard = () => {
                     className="img-fluid my-5"
                     style={{ width: "80px;" }}
                   />
-                  <h5>Marie Horwitz</h5>
+                  <h5>{name}</h5>
                   <p>Web Designer</p>
                   <i className="far fa-edit mb-5"></i>
                 </div>
@@ -50,7 +65,7 @@ const Dashboard = () => {
                     <div className="row pt-1">
                       <div className="col-6 mb-3">
                         <h6>Email</h6>
-                        <p className="text-muted">info@example.com</p>
+                        <p className="text-muted">{email}</p>
                       </div>
                       <div className="col-6 mb-3">
                         <h6>Phone</h6>

@@ -31,7 +31,6 @@ const LoginPage = () => {
       })
       .then((res) => {
         setErrormsg("");
-        console.log(res.data);
         setToken(res.data["authorisation"]);
         localStorage.setItem("authorisation", res.data["authorisation"]);
         history.push("/dashboard");
@@ -49,6 +48,9 @@ const LoginPage = () => {
       })
       .then((res) => {
         setErrormsg("");
+        setToken(res.data["authorisation"]);
+        localStorage.setItem("authorisation", res.data["authorisation"]);
+        history.push("/dashboard");
       })
       .catch((err) => {
         setErrormsg(err.request.response);
@@ -64,8 +66,10 @@ const LoginPage = () => {
         accessToken: response.accessToken,
       })
       .then((res) => {
-        console.log(res);
         setErrormsg("");
+        setToken(res.data["authorisation"]);
+        localStorage.setItem("authorisation", res.data["authorisation"]);
+        history.push("/dashboard");
       })
       .catch((err) => {
         if (err) {
