@@ -28,3 +28,4 @@ registration sucessfull message etc..
 error message css
 github login
 logo in google oauth consnet screen
+update urii in google and facebook appp
