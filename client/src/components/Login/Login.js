@@ -8,15 +8,19 @@ import {
   GoogleLoginButton,
   FacebookLoginButton,
 } from "react-social-login-buttons";
+import { useHistory } from "react-router";
 import "./login.css";
 import unlock from "../../images/unlock.png";
 const LoginPage = () => {
+  let history = useHistory();
   const [userLogin, setuserLogin] = useState({
     email: "",
     password: "",
   });
   // eslint-disable-next-line no-unused-vars
   const [errormsg, setErrormsg] = useState("");
+  // eslint-disable-next-line no-unused-vars
+  const [token, setToken] = useState("");
   const login = (e) => {
     e.preventDefault();
     console.log(userLogin);
@@ -26,8 +30,11 @@ const LoginPage = () => {
         password: userLogin.password,
       })
       .then((res) => {
-        console.log(res);
         setErrormsg("");
+        console.log(res.data);
+        setToken(res.data["authorisation"]);
+        localStorage.setItem("authorisation", res.data["authorisation"]);
+        history.push("/dashboard");
       })
       .catch((err) => {
         setErrormsg(err.request.response);
@@ -41,7 +48,6 @@ const LoginPage = () => {
         token: response.tokenId,
       })
       .then((res) => {
-        console.log(res);
         setErrormsg("");
       })
       .catch((err) => {

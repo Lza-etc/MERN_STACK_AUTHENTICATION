@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const { OAuth2Client } = require("google-auth-library");
 const axios = require("axios");
+const jwt = require("jsonwebtoken");
 const UserModel = require("../models/user");
 const router = express.Router();
 const client = new OAuth2Client(
@@ -21,7 +22,14 @@ router.post("/", async (req, res) => {
       .save()
       .then((resp) => {
         console.log("User registered sucessfully");
-        return res.status(200).send("User registered sucessfully");
+        const userJwt = {
+          name: name,
+          email: email,
+        };
+        const accessToken = jwt.sign(userJwt, process.env.ACCESS_TOKEN);
+        return res
+          .status(200)
+          .json({ message: "success", authorisation: accessToken });
       })
       .catch((error) => {
         if (error.keyValue.email != null && error.code === 11000) {
