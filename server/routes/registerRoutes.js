@@ -51,7 +51,7 @@ router.post("/google", async (req, res) => {
           "11449592949-67stjoat4god0tro9orlh3c3kab0oe58.apps.googleusercontent.com",
       })
       .then(async (response) => {
-        const { name, email_verified, email } = response.payload;
+        const { name, email_verified, email,picture} = response.payload;
         if (email_verified) {
           const user = await UserModel.findOne({
             email: email,
@@ -70,6 +70,7 @@ router.post("/google", async (req, res) => {
               name,
               email,
               googleId,
+              imageUrl:picture,
             });
             user
               .save()
@@ -102,10 +103,10 @@ router.post("/google", async (req, res) => {
 router.post("/facebook", async (req, res) => {
   const accessToken = req.body.accessToken;
   const facebookId = req.body.facebookId;
-  const urlGraphFacebook = `https://graph.facebook.com/v2.11/${facebookId}/?fields=id,name,email&access_token=${accessToken}`;
+  const urlGraphFacebook = `https://graph.facebook.com/v2.11/${facebookId}/?fields=id,name,picture,email&access_token=${accessToken}`;
   try {
     const response = await axios.get(urlGraphFacebook);
-    const { name, email } = response.data;
+    const { name, email,picture } = response.data;
     let fUser;
     try {
       fUser = await UserModel.findOne({
@@ -136,6 +137,7 @@ router.post("/facebook", async (req, res) => {
           name,
           email,
           facebookId,
+          imageUrl:picture,
         });
         user
           .save()

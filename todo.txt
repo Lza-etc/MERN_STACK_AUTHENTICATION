@@ -30,4 +30,5 @@ github login
 logo in google oauth consnet screen
 update urii in google and facebook appp
 
-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
+change http to https in dashboard.js image url before deploying
+image upload message success

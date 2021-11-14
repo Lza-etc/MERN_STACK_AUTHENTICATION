@@ -23,7 +23,6 @@ const LoginPage = () => {
   const [token, setToken] = useState("");
   const login = (e) => {
     e.preventDefault();
-    console.log(userLogin);
     axios
       .post(process.env.REACT_APP_Server + "/login", {
         email: userLogin.email,

@@ -29,6 +29,11 @@ const UserSchema = new mongooseSchema(
       unique:true,
       sparse: true,
     },
+    imageUrl:{
+      required: false,
+      type: String,
+      sparse: true,
+    }
   },
   { timestamps: true }
 );
