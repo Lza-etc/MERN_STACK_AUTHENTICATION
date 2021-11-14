@@ -3,11 +3,17 @@ import { useHistory } from "react-router";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import "./dashboard.css";
+import noprofile from "../../images/noprofilepic.png";
 
 const Dashboard = () => {
   let history = useHistory();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [image, setImage] = useState("");
+  const [errormsg, setErrormsg] = useState("");
+  // eslint-disable-next-line no-unused-vars
+  const [successmsg, setSuccessmsg] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   useEffect(() => {
     const token = localStorage.getItem("authorisation");
     if (token) {
@@ -23,8 +29,11 @@ const Dashboard = () => {
           },
         })
         .then((res) => {
+          console.log(res);
           setName(res.data.name);
           setEmail(res.data.email);
+          setImageUrl(res.data.imageUrl);
+          console.log(res.data.imageUrl);
         })
         .catch((err) => {
           console.log(err);
@@ -34,6 +43,27 @@ const Dashboard = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const changeAvatar = (event) => {
+    event.preventDefault();
+    var formData = new FormData();
+    formData.append("image", image);
+    axios
+      .post(process.env.REACT_APP_Server + "/uploadImage", formData, {
+        headers: {
+          authorisation: "Bearer " + localStorage.getItem("authorisation"),
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setErrormsg("");
+        setSuccessmsg(res.request.response);
+        window.location.reload();
+      })
+      .catch((err) => {
+        setErrormsg(err.request.response);
+      });
+  };
   return (
     <section className="vh-100" style={{ backgroundColor: "#f4f5f7" }}>
       <div className="container py-5 h-100">
@@ -48,12 +78,21 @@ const Dashboard = () => {
                     borderBottomLeftRadius: ".5rem;",
                   }}
                 >
-                  <img
-                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.png"
-                    alt="..."
-                    className="img-fluid my-5"
-                    style={{ width: "80px;" }}
-                  />
+                  {imageUrl ? (
+                    <img
+                      src={imageUrl}
+                      alt="..."
+                      className="img-fluid my-5"
+                      style={{ width: "80px;" }}
+                    />
+                  ) : (
+                    <img
+                      src={noprofile}
+                      alt="..."
+                      className="img-fluid my-5"
+                      style={{ width: "80px;" }}
+                    />
+                  )}
                   <h5>{name}</h5>
                   <p>Web Designer</p>
                   <i className="far fa-edit mb-5"></i>
@@ -85,16 +124,23 @@ const Dashboard = () => {
                       </div>
                     </div>
                     <div className="d-flex justify-content-start">
-                      <a href="#!">
-                        <i className="fab fa-facebook-f fa-lg me-3"></i>
-                      </a>
-                      <a href="#!">
-                        <i className="fab fa-twitter fa-lg me-3"></i>
-                      </a>
-                      <a href="#!">
-                        <i className="fab fa-instagram fa-lg"></i>
-                      </a>
+                      <form
+                        encType="multipart/form-data"
+                        className="form"
+                        onSubmit={changeAvatar}
+                      >
+                        <div>
+                          <input
+                            type="file"
+                            onChange={(e) => {
+                              setImage(e.target.files[0]);
+                            }}
+                          />
+                          <button type="submit">Change Avatar</button>
+                        </div>
+                      </form>
                     </div>
+                    <div>{errormsg}</div>
                   </div>
                 </div>
               </div>
