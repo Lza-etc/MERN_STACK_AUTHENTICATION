@@ -162,7 +162,7 @@ const LoginPage = () => {
               >
                 Sign in
               </button>
-              <div className="text-center mt-3">
+              <div className="text-center mt-3 errorMsg ">
                 <p>{errormsg}</p>
               </div>
               <div className="divider d-flex align-items-center my-4">

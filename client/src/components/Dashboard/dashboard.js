@@ -163,7 +163,7 @@ const Dashboard = () => {
                     
                       </form>
                     </div>
-                    <div>{errormsg}</div>
+                    <div className="errorMsg"><p>{errormsg}</p></div>
                   </div>
                 </div>
               </div>
