@@ -25,6 +25,7 @@ router.post("/", async (req, res) => {
         const userJwt = {
           name: name,
           email: email,
+          form:resp.form,
         };
         const accessToken = jwt.sign(userJwt, process.env.ACCESS_TOKEN);
         return res
@@ -60,6 +61,7 @@ router.post("/google", async (req, res) => {
             const userJwt = {
               name: name,
               email: email,
+              form:user.form,
             };
             const accessToken = jwt.sign(userJwt, process.env.ACCESS_TOKEN);
             return res
@@ -78,6 +80,7 @@ router.post("/google", async (req, res) => {
                 const userJwt = {
                   name: name,
                   email: email,
+                  form:resp.form,
                 };
                 const accessToken = jwt.sign(userJwt, process.env.ACCESS_TOKEN);
                 return res
@@ -126,6 +129,7 @@ router.post("/facebook", async (req, res) => {
       const userJwt = {
         name: name,
         email: email,
+        form:fUser.form,
       };
       const accessToken = jwt.sign(userJwt, process.env.ACCESS_TOKEN);
       return res
@@ -145,6 +149,7 @@ router.post("/facebook", async (req, res) => {
             const userJwt = {
               name: name,
               email: email,
+              form:resp.form,
             };
             const accessToken = jwt.sign(userJwt, process.env.ACCESS_TOKEN);
             return res

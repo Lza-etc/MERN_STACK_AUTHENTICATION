@@ -17,6 +17,7 @@ router.post("/", async (req, res) => {
         const userJwt = {
           name: user.name,
           email: user.email,
+          form:user.form,
         };
         const accessToken = jwt.sign(userJwt, process.env.ACCESS_TOKEN);
         return res
