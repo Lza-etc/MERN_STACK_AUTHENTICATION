@@ -42,6 +42,7 @@ const RegisterPage = () => {
             setToken(res.data["authorisation"]);
             localStorage.setItem("authorisation", res.data["authorisation"]);
             history.push("/dashboard");
+            history.go(0);
           })
           .catch((err) => {
             setErrormsg(err.request.response);
@@ -64,6 +65,7 @@ const RegisterPage = () => {
         setToken(res.data["authorisation"]);
         localStorage.setItem("authorisation", res.data["authorisation"]);
         history.push("/dashboard");
+        history.go(0);
       })
       .catch((err) => {
         setErrormsg(err.request.response);
@@ -84,6 +86,7 @@ const RegisterPage = () => {
         setToken(res.data["authorisation"]);
         localStorage.setItem("authorisation", res.data["authorisation"]);
         history.push("/dashboard");
+        history.go(0);
       })
       .catch((err) => {
         if (err) {
