@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import usePasswordValidator from "react-use-password-validator";
+import jwt from "jsonwebtoken";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import {
@@ -41,7 +42,7 @@ const RegisterPage = () => {
             setErrormsg("");
             setToken(res.data["authorisation"]);
             localStorage.setItem("authorisation", res.data["authorisation"]);
-            history.push("/dashboard");
+            history.push("/form");
             history.go(0);
           })
           .catch((err) => {
@@ -64,8 +65,14 @@ const RegisterPage = () => {
         setErrormsg("");
         setToken(res.data["authorisation"]);
         localStorage.setItem("authorisation", res.data["authorisation"]);
-        history.push("/dashboard");
-        history.go(0);
+        const user = jwt.decode(localStorage.getItem("authorisation"));
+        if (user.form) {
+          history.push("/dashboard");
+          history.go(0);
+        } else {
+          history.push("/form");
+          history.go(0);
+        }
       })
       .catch((err) => {
         setErrormsg(err.request.response);
@@ -85,12 +92,17 @@ const RegisterPage = () => {
         setErrormsg("");
         setToken(res.data["authorisation"]);
         localStorage.setItem("authorisation", res.data["authorisation"]);
-        history.push("/dashboard");
-        history.go(0);
+        const user = jwt.decode(localStorage.getItem("authorisation"));
+        if (user.form) {
+          history.push("/dashboard");
+          history.go(0);
+        } else {
+          history.push("/form");
+          history.go(0);
+        }
       })
       .catch((err) => {
         if (err) {
-          console.log(err.request);
           setErrormsg(err.request.response);
         }
       });

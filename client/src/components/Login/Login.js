@@ -8,6 +8,7 @@ import {
   GoogleLoginButton,
   FacebookLoginButton,
 } from "react-social-login-buttons";
+import jwt from "jsonwebtoken";
 import { useHistory } from "react-router";
 import "./login.css";
 import unlock from "../../images/unlock.png";
@@ -50,8 +51,14 @@ const LoginPage = () => {
         setErrormsg("");
         setToken(res.data["authorisation"]);
         localStorage.setItem("authorisation", res.data["authorisation"]);
-        history.push("/dashboard");
-        history.go(0);
+        const user = jwt.decode(localStorage.getItem("authorisation"));
+        if (user.form) {
+          history.push("/dashboard");
+          history.go(0);
+        } else {
+          history.push("/form");
+          history.go(0);
+        }
       })
       .catch((err) => {
         setErrormsg(err.request.response);
@@ -70,8 +77,14 @@ const LoginPage = () => {
         setErrormsg("");
         setToken(res.data["authorisation"]);
         localStorage.setItem("authorisation", res.data["authorisation"]);
-        history.push("/dashboard");
-        history.go(0);
+        const user = jwt.decode(localStorage.getItem("authorisation"));
+        if (user.form) {
+          history.push("/dashboard");
+          history.go(0);
+        } else {
+          history.push("/form");
+          history.go(0);
+        }
       })
       .catch((err) => {
         if (err) {

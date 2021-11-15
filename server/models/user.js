@@ -9,31 +9,60 @@ const UserSchema = new mongooseSchema(
     email: {
       type: String,
       required: true,
-      unique:true,
+      unique: true,
     },
     password: {
-      required:false,
+      required: false,
       type: String,
-
     },
     googleId: {
       required: false,
       type: String,
-      unique:true,
+      unique: true,
       sparse: true,
-      
     },
     facebookId: {
       required: false,
       type: String,
-      unique:true,
+      unique: true,
       sparse: true,
     },
-    imageUrl:{
+    imageUrl: {
       required: false,
       type: String,
       sparse: true,
-    }
+    },
+    designation: {
+      required: false,
+      type: String,
+      sparse: true,
+    },
+    specialization: {
+      required: false,
+      type: String,
+      sparse: true,
+    },
+    bio: {
+      required: false,
+      type: String,
+      sparse: true,
+    },
+    phone: {
+      required: false,
+      type: String,
+      sparse: true,
+    },
+    company: {
+      required: false,
+      type: String,
+      sparse: true,
+    },
+    form: {
+      required: false,
+      type: Boolean,
+      sparse: true,
+      default:false,
+    },
   },
   { timestamps: true }
 );

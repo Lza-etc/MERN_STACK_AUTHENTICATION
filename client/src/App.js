@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route ,Switch } from "react-router-dom";
 import Dashboard from "./components/Dashboard/dashboard";
 import LoginPage from "./components/Login/Login";
 import Navbar from "./components/Navbar/Navbar";
+import ProfileForm from "./components/ProfileForm/ProfileForm";
 import RegisterPage from "./components/Register/Register";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route exact path="/" component={LoginPage} />
         <Route  path="/register" component={RegisterPage} />
         <Route  path="/dashboard" component={Dashboard} />
+        <Route  path="/form" component={ProfileForm} />
         </Switch>
       </div>
     </Router>

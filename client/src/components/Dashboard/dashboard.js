@@ -10,6 +10,12 @@ const Dashboard = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [image, setImage] = useState("");
+  const [designation, setDesignation] = useState("");
+  const [specialization, setspecialization] = useState("");
+  const [phone, setphone] = useState("");
+  const [bio, setbio] = useState("");
+  const [company, setcompany] = useState("");
+
   const [errormsg, setErrormsg] = useState("");
   // eslint-disable-next-line no-unused-vars
   const [successmsg, setSuccessmsg] = useState("");
@@ -29,11 +35,14 @@ const Dashboard = () => {
           },
         })
         .then((res) => {
-          console.log(res);
           setName(res.data.name);
           setEmail(res.data.email);
           setImageUrl(res.data.imageUrl);
-          console.log(res.data.imageUrl);
+          setDesignation(res.data.designation);
+          setspecialization(res.data.specialization);
+          setbio(res.data.bio);
+          setphone(res.data.phone);
+          setcompany(res.data.company);
         })
         .catch((err) => {
           console.log(err);
@@ -46,6 +55,7 @@ const Dashboard = () => {
 
   const changeAvatar = (event) => {
     event.preventDefault();
+    console.log("there");
     var formData = new FormData();
     formData.append("image", image);
     axios
@@ -93,8 +103,12 @@ const Dashboard = () => {
                       style={{ width: "80px;" }}
                     />
                   )}
-                  <h5 className="white-text" style={{fontWeight:"bolder"}}>{name}</h5>
-                  <p className="white-text" style={{fontWeight:"bolder"}}>Web Designer</p>
+                  <h5 className="white-text" style={{ fontWeight: "bolder" }}>
+                    {name}
+                  </h5>
+                  <p className="white-text" style={{ fontWeight: "bolder" }}>
+                    {specialization}
+                  </p>
                   <i className="far fa-edit mb-5"></i>
                 </div>
                 <div className="col-md-8">
@@ -108,19 +122,26 @@ const Dashboard = () => {
                       </div>
                       <div className="col-6 mb-3">
                         <h6>Phone</h6>
-                        <p className="text-muted">123 456 789</p>
+                        <p className="text-muted">{phone}</p>
                       </div>
                     </div>
                     <h6>Projects</h6>
                     <hr className="mt-0 mb-4"></hr>
                     <div className="row pt-1">
                       <div className="col-6 mb-3">
-                        <h6>Recent</h6>
-                        <p className="text-muted">Lorem ipsum</p>
+                        <h6>Company</h6>
+                        <p className="text-muted">{company}</p>
                       </div>
                       <div className="col-6 mb-3">
-                        <h6>Most Viewed</h6>
-                        <p className="text-muted">Dolor sit amet</p>
+                        <h6>Designation</h6>
+                        <p className="text-muted">{designation}</p>
+                      </div>
+                    </div>
+                    <hr className="mt-0 mb-4"></hr>
+                    <div className="row pt-1">
+                      <div className="col-6 mb-3">
+                        <h6>Bio</h6>
+                        <p className="text-muted">{bio}</p>
                       </div>
                     </div>
                     <div className="d-flex justify-content-start">
@@ -131,13 +152,15 @@ const Dashboard = () => {
                       >
                         <div>
                           <input
+                          className="fileUpload"
                             type="file"
                             onChange={(e) => {
                               setImage(e.target.files[0]);
                             }}
                           />
-                          <button type="submit">Change Avatar</button>
+                          <button type="submit" className="fileSubmit" >Change Avatar</button>
                         </div>
+                    
                       </form>
                     </div>
                     <div>{errormsg}</div>
