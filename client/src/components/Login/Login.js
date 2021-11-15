@@ -33,6 +33,7 @@ const LoginPage = () => {
         setToken(res.data["authorisation"]);
         localStorage.setItem("authorisation", res.data["authorisation"]);
         history.push("/dashboard");
+        history.go(0);
       })
       .catch((err) => {
         setErrormsg(err.request.response);
@@ -50,6 +51,7 @@ const LoginPage = () => {
         setToken(res.data["authorisation"]);
         localStorage.setItem("authorisation", res.data["authorisation"]);
         history.push("/dashboard");
+        history.go(0);
       })
       .catch((err) => {
         setErrormsg(err.request.response);
@@ -69,6 +71,7 @@ const LoginPage = () => {
         setToken(res.data["authorisation"]);
         localStorage.setItem("authorisation", res.data["authorisation"]);
         history.push("/dashboard");
+        history.go(0);
       })
       .catch((err) => {
         if (err) {
@@ -162,7 +165,7 @@ const LoginPage = () => {
                   onFailure={failureFacebook}
                   render={(renderProps) => (
                     <FacebookLoginButton
-                      text={"Signup with Facebook"}
+                      text={"Continue with Facebook"}
                       onClick={renderProps.onClick}
                       disabled={renderProps.disabled}
                       className="facebook-btn"

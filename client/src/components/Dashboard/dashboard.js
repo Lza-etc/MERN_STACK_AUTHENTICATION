@@ -65,7 +65,7 @@ const Dashboard = () => {
       });
   };
   return (
-    <section className="vh-100" style={{ backgroundColor: "#f4f5f7" }}>
+    <section className="vh-100 " style={{ backgroundColor: "#f4f5f7" }}>
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col col-lg-6 mb-4 mb-lg-0">
@@ -93,8 +93,8 @@ const Dashboard = () => {
                       style={{ width: "80px;" }}
                     />
                   )}
-                  <h5>{name}</h5>
-                  <p>Web Designer</p>
+                  <h5 className="white-text" style={{fontWeight:"bolder"}}>{name}</h5>
+                  <p className="white-text" style={{fontWeight:"bolder"}}>Web Designer</p>
                   <i className="far fa-edit mb-5"></i>
                 </div>
                 <div className="col-md-8">
