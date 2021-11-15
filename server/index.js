@@ -5,8 +5,8 @@ var bodyParser = require('body-parser')
 require("dotenv").config();
 const loginRouter=require("./routes/loginRoute");
 const registerRouter=require("./routes/registerRoutes");
-const dashboard=require("./routes/dashboard")
-const uploadImage=require("./routes/uploadImage")
+const dashboard=require("./routes/dashboard");
+const uploadImage=require("./routes/uploadImage");
 const app=express();
 
 app.use(cors({
@@ -27,6 +27,7 @@ app.use("/login",loginRouter);
 app.use("/register",registerRouter);
 app.use("/dashboard",dashboard);
 app.use("/uploadImage",uploadImage);
+
 
 
 app.get("/",(req,res)=>{

@@ -39,7 +39,7 @@ const upload = multer({
 }).single("image");
 
 router.post("/", verifyjwt, (req, res) => {
-  console.log("image  ");
+  const x=true;
   upload(req, res, async (err) => {
     if (err) {
       console.log(err);
