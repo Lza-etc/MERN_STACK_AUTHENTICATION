@@ -31,14 +31,14 @@ const ProfileForm = () => {
     e.preventDefault();
     axios
       .post(
-        process.env.REACT_APP_Server + "/dashboard",
+        "https://socialelite.herokuapp.com/dashboard",
         {
           phone: userDetails.phone,
           specialization: userDetails.specialization,
           designation: userDetails.designation,
           bio: userDetails.bio,
           company: userDetails.company,
-          form:true,
+          form: true,
         },
         {
           headers: {

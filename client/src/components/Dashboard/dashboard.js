@@ -29,7 +29,7 @@ const Dashboard = () => {
         history.push("/");
       }
       axios
-        .get(process.env.REACT_APP_Server + "/dashboard", {
+        .get("https://socialelite.herokuapp.com/dashboard", {
           headers: {
             authorisation: "Bearer " + token,
           },
@@ -59,7 +59,7 @@ const Dashboard = () => {
     var formData = new FormData();
     formData.append("image", image);
     axios
-      .post(process.env.REACT_APP_Server + "/uploadImage", formData, {
+      .post("https://socialelite.herokuapp.com/uploadImage", formData, {
         headers: {
           authorisation: "Bearer " + localStorage.getItem("authorisation"),
         },
@@ -152,18 +152,21 @@ const Dashboard = () => {
                       >
                         <div>
                           <input
-                          className="fileUpload"
+                            className="fileUpload"
                             type="file"
                             onChange={(e) => {
                               setImage(e.target.files[0]);
                             }}
                           />
-                          <button type="submit" className="fileSubmit" >Change Avatar</button>
+                          <button type="submit" className="fileSubmit">
+                            Change Avatar
+                          </button>
                         </div>
-                    
                       </form>
                     </div>
-                    <div className="errorMsg"><p>{errormsg}</p></div>
+                    <div className="errorMsg">
+                      <p>{errormsg}</p>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -25,7 +25,7 @@ const LoginPage = () => {
   const login = (e) => {
     e.preventDefault();
     axios
-      .post(process.env.REACT_APP_Server + "/login", {
+      .post("https://socialelite.herokuapp.com/login", {
         email: userLogin.email,
         password: userLogin.password,
       })
@@ -43,7 +43,7 @@ const LoginPage = () => {
 
   const responseGoogle = (response) => {
     axios
-      .post(process.env.REACT_APP_Server + "/register/google", {
+      .post("https://socialelite.herokuapp.com/register/google", {
         googleId: response.profileObj.googleId,
         token: response.tokenId,
       })
@@ -69,7 +69,7 @@ const LoginPage = () => {
   };
   const responseFacebook = (response) => {
     axios
-      .post("http://localhost:5000/register/facebook", {
+      .post("https://socialelite.herokuapp.com/register/facebook", {
         facebookId: response.userID,
         accessToken: response.accessToken,
       })
