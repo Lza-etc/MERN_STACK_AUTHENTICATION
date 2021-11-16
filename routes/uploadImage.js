@@ -51,7 +51,7 @@ router.post("/", verifyjwt, (req, res) => {
         return res.status(400).send("Please Upload an Image");
       }
       console.log(req.get("host"));
-      const imageUrl = "https://" + req.get("host") + "/" + req.file.path;
+      const imageUrl = "https://socialelite.herokuapp.com/" + req.file.path;
       await UserModel.updateOne(
         { email: req.user.email },
         { $set: { imageUrl: imageUrl } }
