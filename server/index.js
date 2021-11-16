@@ -8,6 +8,7 @@ const registerRouter=require("./routes/registerRoutes");
 const dashboard=require("./routes/dashboard");
 const uploadImage=require("./routes/uploadImage");
 const app=express();
+const PORT=process.env.PORT || 5000;
 
 app.use(cors({
     origin:"https://localhost:3000",
