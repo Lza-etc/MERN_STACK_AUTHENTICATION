@@ -11,7 +11,7 @@ const app=express();
 const PORT=process.env.PORT || 5000;
 
 app.use(cors({
-    origin:"https://allen.software/",
+    origin:"https://tender-poincare-56ebfe.netlify.app",
 }));
 
 app.use(express.json());
