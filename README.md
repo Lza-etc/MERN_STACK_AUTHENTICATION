@@ -27,4 +27,8 @@ npm run dev
 For deploying to Heroku, please refer to [this](https://www.youtube.com/watch?v=71wSzpLyW9k) helpful video by TraversyMedia.
 
 
+## Contributing
+Questions, comments, suggestions, and other contributions are welcome, as this is an open-source example project and not officially maintained as part of an application or library etc. 
+
+
 
