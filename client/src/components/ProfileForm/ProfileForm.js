@@ -31,8 +31,8 @@ const ProfileForm = () => {
     e.preventDefault();
     axios
       .post(
-        // "https://socialelite.herokuapp.com/dashboard",
-        "http://localhost:5000/dashboard",
+        "https://mernapi-z9cl.onrender.com/dashboard",
+        // "http://localhost:5000/dashboard",
         {
           phone: userDetails.phone,
           specialization: userDetails.specialization,
@@ -71,7 +71,7 @@ const ProfileForm = () => {
         <h2>User Profile</h2>
 
         <div className="form-group">
-          <label for="email">Contact Number:</label>
+          <label htmlFor="email">Contact Number:</label>
           <div className="relative">
             <input
               onChange={(e) => {
@@ -88,7 +88,7 @@ const ProfileForm = () => {
           </div>
         </div>
         <div className="form-group">
-          <label for="email">Company Name:</label>
+          <label htmlFor="email">Company Name:</label>
           <div className="relative">
             <input
               onChange={(e) => {
@@ -103,7 +103,7 @@ const ProfileForm = () => {
           </div>
         </div>
         <div className="form-group">
-          <label for="email">Designation:</label>
+          <label htmlFor="email">Designation:</label>
           <div className="relative">
             <input
               onChange={(e) => {
@@ -118,7 +118,7 @@ const ProfileForm = () => {
           </div>
         </div>
         <div className="form-group">
-          <label for="email">Specilization:</label>
+          <label htmlFor="email">Specilization:</label>
           <div className="relative">
             <input
               onChange={(e) => {
@@ -136,7 +136,7 @@ const ProfileForm = () => {
           </div>
         </div>
         <div className="form-group">
-          <label for="email">Bio</label>
+          <label htmlFor="email">Bio</label>
           <div className="relative">
             <input
               onChange={(e) => {

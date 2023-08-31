@@ -33,8 +33,8 @@ const RegisterPage = () => {
     if (userRegister.password === userRegister.cpassword) {
       if (isValid) {
         axios
-          // .post("https://socialelite.herokuapp.com/register", {
-            .post("http://localhost:5000/register", {
+          .post("https://mernapi-z9cl.onrender.com/register", {
+            // .post("http://localhost:5000/register", {
             name: userRegister.name,
             email: userRegister.email,
             password: userRegister.password,
@@ -58,8 +58,8 @@ const RegisterPage = () => {
   };
   const responseGoogle = (response) => {
     axios
-      // .post("https://socialelite.herokuapp.com/register/google", {
-        .post("http://localhost:5000/register/google", {
+      .post("https://mernapi-z9cl.onrender.com/register/google", {
+        // .post("http://localhost:5000/register/google", {
         googleId: response.profileObj.googleId,
         token: response.tokenId,
       })
@@ -86,8 +86,8 @@ const RegisterPage = () => {
   };
   const responseFacebook = (response) => {
     axios
-      // .post("https://socialelite.herokuapp.com/register/facebook", {
-        .post("http://localhost:5000/register/facebook", {
+      .post("https://mernapi-z9cl.onrender.com/register/facebook", {
+        // .post("http://localhost:5000/register/facebook", {
         facebookId: response.userID,
         accessToken: response.accessToken,
       })
@@ -138,7 +138,7 @@ const RegisterPage = () => {
                     setUserRegister({ ...userRegister, name: e.target.value });
                   }}
                 />
-                <label className="form-label" for="form1Example13">
+                <label className="form-label" htmlFor="form1Example13">
                   Name
                 </label>
               </div>
@@ -154,7 +154,7 @@ const RegisterPage = () => {
                     setUserRegister({ ...userRegister, email: e.target.value });
                   }}
                 />
-                <label className="form-label" for="form1Example13">
+                <label className="form-label" htmlFor="form1Example13">
                   Email address
                 </label>
               </div>
@@ -174,7 +174,7 @@ const RegisterPage = () => {
                     setIsValid(e.target.value);
                   }}
                 />
-                <label className="form-label" for="form1Example23">
+                <label className="form-label" htmlFor="form1Example23">
                   Password
                 </label>
               </div>
@@ -193,7 +193,7 @@ const RegisterPage = () => {
                     });
                   }}
                 />
-                <label className="form-label" for="form1Example23">
+                <label className="form-label" htmlFor="form1Example23">
                   Confirm Password
                 </label>
               </div>

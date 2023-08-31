@@ -25,8 +25,8 @@ const LoginPage = () => {
   const login = (e) => {
     e.preventDefault();
     axios
-      // .post("https://socialelite.herokuapp.com/login", {
-        .post("http://localhost:5000/login", {
+      .post("https://mernapi-z9cl.onrender.com/login", {
+        // .post("http://localhost:5000/login", {
         email: userLogin.email,
         password: userLogin.password,
       })
@@ -44,8 +44,8 @@ const LoginPage = () => {
 
   const responseGoogle = (response) => {
     axios
-      // .post("https://socialelite.herokuapp.com/register/google", {
-        .post("http://localhost:5000/register/google", {
+      .post("https://mernapi-z9cl.onrender.com/register/google", {
+        // .post("http://localhost:5000/register/google", {
         googleId: response.profileObj.googleId,
         token: response.tokenId,
       })
@@ -71,8 +71,8 @@ const LoginPage = () => {
   };
   const responseFacebook = (response) => {
     axios
-      // .post("https://socialelite.herokuapp.com/register/facebook", {
-        .post("http://localhost:5000/register/facebook", {
+      .post("https://mernapi-z9cl.onrender.com/register/facebook", {
+        // .post("http://localhost:5000/register/facebook", {
         facebookId: response.userID,
         accessToken: response.accessToken,
       })
@@ -125,7 +125,7 @@ const LoginPage = () => {
                     setuserLogin({ ...userLogin, email: e.target.value });
                   }}
                 />
-                <label className="form-label" for="form1Example13">
+                <label className="form-label" htmlFor="form1Example13">
                   Email address
                 </label>
               </div>
@@ -144,7 +144,7 @@ const LoginPage = () => {
                     });
                   }}
                 />
-                <label className="form-label" for="form1Example23">
+                <label className="form-label" htmlFor="form1Example23">
                   Password
                 </label>
               </div>

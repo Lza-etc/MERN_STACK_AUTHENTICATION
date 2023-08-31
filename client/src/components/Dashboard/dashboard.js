@@ -3,7 +3,6 @@ import { useHistory } from "react-router";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import "./dashboard.css";
-import "../../../../public/uploads";
 import noprofile from "../../images/noprofilepic.png";
 
 const Dashboard = () => {
@@ -30,8 +29,8 @@ const Dashboard = () => {
         history.push("/");
       }
       axios
-        // .get("https://socialelite.herokuapp.com/dashboard", {
-          .get("http://localhost:5000/dashboard", {
+        .get("https://mernapi-z9cl.onrender.com/dashboard", {
+          // .get("http://localhost:5000/dashboard", {
           headers: {
             authorisation: "Bearer " + token,
           },
@@ -61,8 +60,8 @@ const Dashboard = () => {
     var formData = new FormData();
     formData.append("image", image);
     axios
-      // .post("https://socialelite.herokuapp.com/uploadImage", formData, {
-        .post("http://localhost:5000/uploadImage", formData, {
+      .post("https://mernapi-z9cl.onrender.com/uploadImage", formData, {
+        // .post("http://localhost:5000/uploadImage", formData, {
         headers: {
           authorisation: "Bearer " + localStorage.getItem("authorisation"),
         },
@@ -71,7 +70,7 @@ const Dashboard = () => {
         console.log(res);
         setErrormsg("");
         setSuccessmsg(res.request.response);
-        window.location.reload();
+        // window.location.reload();
       })
       .catch((err) => {
         setErrormsg(err.request.response);
@@ -158,6 +157,7 @@ const Dashboard = () => {
                             className="fileUpload"
                             type="file"
                             onChange={(e) => {
+                              console.log("hii");
                               setImage(e.target.files[0]);
                             }}
                           />
