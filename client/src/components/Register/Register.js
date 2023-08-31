@@ -33,7 +33,8 @@ const RegisterPage = () => {
     if (userRegister.password === userRegister.cpassword) {
       if (isValid) {
         axios
-          .post("https://socialelite.herokuapp.com/register", {
+          // .post("https://socialelite.herokuapp.com/register", {
+            .post("http://localhost:5000/register", {
             name: userRegister.name,
             email: userRegister.email,
             password: userRegister.password,
@@ -57,7 +58,8 @@ const RegisterPage = () => {
   };
   const responseGoogle = (response) => {
     axios
-      .post("https://socialelite.herokuapp.com/register/google", {
+      // .post("https://socialelite.herokuapp.com/register/google", {
+        .post("http://localhost:5000/register/google", {
         googleId: response.profileObj.googleId,
         token: response.tokenId,
       })
@@ -84,7 +86,8 @@ const RegisterPage = () => {
   };
   const responseFacebook = (response) => {
     axios
-      .post("https://socialelite.herokuapp.com/register/facebook", {
+      // .post("https://socialelite.herokuapp.com/register/facebook", {
+        .post("http://localhost:5000/register/facebook", {
         facebookId: response.userID,
         accessToken: response.accessToken,
       })

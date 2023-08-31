@@ -25,7 +25,8 @@ const LoginPage = () => {
   const login = (e) => {
     e.preventDefault();
     axios
-      .post("https://socialelite.herokuapp.com/login", {
+      // .post("https://socialelite.herokuapp.com/login", {
+        .post("http://localhost:5000/login", {
         email: userLogin.email,
         password: userLogin.password,
       })
@@ -43,7 +44,8 @@ const LoginPage = () => {
 
   const responseGoogle = (response) => {
     axios
-      .post("https://socialelite.herokuapp.com/register/google", {
+      // .post("https://socialelite.herokuapp.com/register/google", {
+        .post("http://localhost:5000/register/google", {
         googleId: response.profileObj.googleId,
         token: response.tokenId,
       })
@@ -69,7 +71,8 @@ const LoginPage = () => {
   };
   const responseFacebook = (response) => {
     axios
-      .post("https://socialelite.herokuapp.com/register/facebook", {
+      // .post("https://socialelite.herokuapp.com/register/facebook", {
+        .post("http://localhost:5000/register/facebook", {
         facebookId: response.userID,
         accessToken: response.accessToken,
       })

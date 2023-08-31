@@ -31,7 +31,8 @@ const ProfileForm = () => {
     e.preventDefault();
     axios
       .post(
-        "https://socialelite.herokuapp.com/dashboard",
+        // "https://socialelite.herokuapp.com/dashboard",
+        "http://localhost:5000/dashboard",
         {
           phone: userDetails.phone,
           specialization: userDetails.specialization,

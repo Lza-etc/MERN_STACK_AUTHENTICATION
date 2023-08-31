@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import "./dashboard.css";
+import "../../../../public/uploads";
 import noprofile from "../../images/noprofilepic.png";
 
 const Dashboard = () => {
@@ -29,7 +30,8 @@ const Dashboard = () => {
         history.push("/");
       }
       axios
-        .get("https://socialelite.herokuapp.com/dashboard", {
+        // .get("https://socialelite.herokuapp.com/dashboard", {
+          .get("http://localhost:5000/dashboard", {
           headers: {
             authorisation: "Bearer " + token,
           },
@@ -59,7 +61,8 @@ const Dashboard = () => {
     var formData = new FormData();
     formData.append("image", image);
     axios
-      .post("https://socialelite.herokuapp.com/uploadImage", formData, {
+      // .post("https://socialelite.herokuapp.com/uploadImage", formData, {
+        .post("http://localhost:5000/uploadImage", formData, {
         headers: {
           authorisation: "Bearer " + localStorage.getItem("authorisation"),
         },
@@ -85,7 +88,7 @@ const Dashboard = () => {
                   className="col-md-4 gradient-custom text-center text-white"
                   style={{
                     borderTopLeftRadius: ".5rem",
-                    borderBottomLeftRadius: ".5rem;",
+                    borderBottomLeftRadius: ".5rem",
                   }}
                 >
                   {imageUrl ? (
@@ -93,14 +96,14 @@ const Dashboard = () => {
                       src={imageUrl}
                       alt="..."
                       className="img-fluid my-5"
-                      style={{ width: "80px;" }}
+                      style={{ width: "80px" }}
                     />
                   ) : (
                     <img
                       src={noprofile}
                       alt="..."
                       className="img-fluid my-5"
-                      style={{ width: "80px;" }}
+                      style={{ width: "80px" }}
                     />
                   )}
                   <h5 className="white-text" style={{ fontWeight: "bolder" }}>

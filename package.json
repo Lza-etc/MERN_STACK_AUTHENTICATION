@@ -7,7 +7,7 @@
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Allen",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "@sendgrid/mail": "^7.6.0",
